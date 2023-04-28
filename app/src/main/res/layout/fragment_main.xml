@@ -63,7 +63,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="@layout/item_movie"></androidx.recyclerview.widget.RecyclerView>
+            tools:listitem="@layout/item_movie" />
     </LinearLayout>
 
     <LinearLayout
@@ -91,7 +91,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="@layout/item_movie"></androidx.recyclerview.widget.RecyclerView>
+            tools:listitem="@layout/item_movie" />
     </LinearLayout>
 
     <LinearLayout
@@ -119,7 +119,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="@layout/item_movie"></androidx.recyclerview.widget.RecyclerView>
+            tools:listitem="@layout/item_movie" />
     </LinearLayout>
 
 
