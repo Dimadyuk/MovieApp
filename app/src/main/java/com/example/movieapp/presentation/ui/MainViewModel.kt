@@ -1,26 +1,29 @@
 package com.example.movieapp.presentation.ui
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.data.network.ApiFactory
 import com.example.movieapp.data.repositories.MovieRepositoryImpl
 import com.example.movieapp.domain.MovieItem
-import com.example.movieapp.domain.usecases.GetPopularMoviesUseCase
+import com.example.movieapp.domain.usecases.LoadPopularMoviesUseCase
 import kotlinx.coroutines.launch
 
-class MainViewModel() : ViewModel() {
-    private val repository = MovieRepositoryImpl()
-    private val getPopularMoviesUseCase = GetPopularMoviesUseCase(repository)
+class MainViewModel(application: Application) : AndroidViewModel(application) {
+    private val repository = MovieRepositoryImpl(application)
+    private val loadPopularMoviesUseCase = LoadPopularMoviesUseCase(repository)
     var movieList = MutableLiveData<List<MovieItem>>()
 
-init {
-    loadData()
-}
-    fun loadData() {
+    init {
+        loadData()
+    }
+
+    private fun loadData() {
         viewModelScope.launch {
-            val responseContainer = getPopularMoviesUseCase()
+            val responseContainer = loadPopularMoviesUseCase()
             //TODO need rework to useCases
             val listOfMovies = mutableListOf<MovieItem>()
             val listOfResult = responseContainer.results

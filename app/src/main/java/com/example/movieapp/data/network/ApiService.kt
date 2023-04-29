@@ -7,7 +7,7 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("/3/movie/popular")
-    suspend fun getPopularMovies(
+    suspend fun loadPopularMovies(
         @Query(QUERY_PARAM_API_KEY) apiKey: String = API_KEY,
         @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE,
         @Query(QUERY_PARAM_PAGE) page: String = "1"

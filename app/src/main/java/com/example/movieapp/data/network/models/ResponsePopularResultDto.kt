@@ -10,7 +10,7 @@ data class ResponsePopularResultDto(
 
     @SerializedName("results")
     @Expose
-    val results: List<PopularResultDao>? = null,
+    val results: List<MovieItemDto>? = null,
 
     @SerializedName("total_pages")
     @Expose

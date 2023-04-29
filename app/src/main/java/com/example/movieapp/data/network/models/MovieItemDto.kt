@@ -5,7 +5,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-data class PopularResultDao(
+data class MovieItemDto(
     @SerializedName("adult")
     @Expose
     val adult: Boolean? = null,
