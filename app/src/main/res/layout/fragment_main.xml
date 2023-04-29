@@ -51,7 +51,7 @@
             android:id="@+id/tv_movies"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Movies"
+            android:text="New Movies"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
@@ -67,7 +67,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_top_10_movies"
+        android:id="@+id/ll_top_movies"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -76,15 +76,15 @@
         app:layout_constraintTop_toBottomOf="@+id/ll_movies">
 
         <TextView
-            android:id="@+id/tv_top_10_movies"
+            android:id="@+id/tv_top_movies"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Top 10 TV Shows Today"
+            android:text="Top Movies"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_top_10_movies"
+            android:id="@+id/rv_top_movies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -101,7 +101,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_top_10_movies">
+        app:layout_constraintTop_toBottomOf="@+id/ll_top_movies">
 
         <TextView
             android:id="@+id/tv_my_favourites_movies"
