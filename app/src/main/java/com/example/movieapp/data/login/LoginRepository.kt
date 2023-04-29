@@ -1,6 +1,6 @@
-package com.example.movieapp.data
+package com.example.movieapp.data.login
 
-import com.example.movieapp.data.model.LoggedInUser
+import com.example.movieapp.data.login.model.LoggedInUser
 
 /**
  * Class that requests authentication and user information from the remote data source and

@@ -2,8 +2,8 @@ package com.example.movieapp.presentation.ui.fragments.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.movieapp.data.LoginDataSource
-import com.example.movieapp.data.LoginRepository
+import com.example.movieapp.data.login.LoginDataSource
+import com.example.movieapp.data.login.LoginRepository
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

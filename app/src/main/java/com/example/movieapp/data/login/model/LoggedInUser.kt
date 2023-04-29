@@ -1,4 +1,4 @@
-package com.example.movieapp.data.model
+package com.example.movieapp.data.login.model
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository
