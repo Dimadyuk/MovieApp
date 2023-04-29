@@ -12,30 +12,32 @@ import kotlinx.coroutines.launch
 
 class MainViewModel() : ViewModel() {
     private val repository = MovieRepositoryImpl()
+    private val getPopularMoviesUseCase = GetPopularMoviesUseCase(repository)
     var movieList = MutableLiveData<List<MovieItem>>()
+
+init {
+    loadData()
+}
     fun loadData() {
         viewModelScope.launch {
-            val jsonContainer = GetPopularMoviesUseCase(repository).invoke()
+            val responseContainer = getPopularMoviesUseCase()
             //TODO need rework to useCases
             val listOfMovies = mutableListOf<MovieItem>()
-            val keySet = jsonContainer.results
-            if (keySet != null) {
-                for (currentKey in keySet) {
-                    val name = currentKey.originalTitle ?: ""
-                    val id = currentKey.id ?: 0
-                    val image = ApiFactory.BASE_IMAGE_URL + (currentKey.backdropPath ?: "")
+            val listOfResult = responseContainer.results
+            if (listOfResult != null) {
+                for (result in listOfResult) {
+                    val name = result.originalTitle ?: ""
+                    val id = result.id ?: 0
+                    val image = ApiFactory.BASE_IMAGE_URL + (result.backdropPath ?: "")
                     val newItem = MovieItem(id = id, name = name, imageUrl = image)
                     listOfMovies.add(newItem)
                 }
                 movieList.value = listOfMovies
             }
-
-
-
-
-
-
-            Log.d("MainViewModel", jsonContainer.toString())
+            Log.d(
+                "MainViewModel",
+                this@MainViewModel.toString() + " - " + responseContainer.toString()
+            )
         }
     }
 }

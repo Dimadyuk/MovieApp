@@ -1,6 +1,5 @@
 package com.example.movieapp.presentation.ui.fragments
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
 import com.example.movieapp.domain.MovieItem
 import com.squareup.picasso.Picasso
-import java.lang.Exception
 
 class MainAdapter() :
     RecyclerView.Adapter<MainAdapter.MovieInfoViewHolder>() {
@@ -39,7 +37,6 @@ class MainAdapter() :
     override fun onBindViewHolder(holder: MovieInfoViewHolder, position: Int) {
         val movieItem = movieInfoList[position]
         try {
-            //TODO don't load image
             holder.tvTitle.text = movieItem.name
             Picasso.get().load(movieItem.imageUrl).into(holder.ivLogo)
         } catch (e: Exception) {
