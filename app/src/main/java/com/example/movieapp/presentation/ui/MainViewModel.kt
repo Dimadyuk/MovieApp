@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Build
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.data.repositories.MovieRepositoryImpl
@@ -17,11 +16,7 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
     private val loadPopularMoviesUseCase = LoadPopularMoviesUseCase(repository)
     private val getPopularMovieListUseCase = GetPopularMovieListUseCase(repository)
 
-    var movieList = getPopularMovieListUseCase.invoke()
-
-    init {
-        getPopularMovieListUseCase
-    }
+    val movieList = getPopularMovieListUseCase.invoke()
 
     private fun isNetworkAvailable(context: Context): Boolean {
         val connectivityManager =

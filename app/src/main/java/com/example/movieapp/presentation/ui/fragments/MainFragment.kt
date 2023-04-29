@@ -18,8 +18,7 @@ class MainFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         return binding.root
 
@@ -37,10 +36,6 @@ class MainFragment : Fragment() {
     }
 
     companion object {
-        @JvmStatic
-        fun newInstance() =
-            MainFragment().apply {
-
-            }
+        fun newInstance() = MainFragment()
     }
 }

@@ -6,7 +6,6 @@ import androidx.lifecycle.map
 import com.example.movieapp.data.database.AppDatabase
 import com.example.movieapp.data.mapper.MovieMapper
 import com.example.movieapp.data.network.ApiFactory
-import com.example.movieapp.data.network.models.ResponsePopularResultDto
 import com.example.movieapp.domain.MovieItem
 import com.example.movieapp.domain.MovieRepository
 import kotlinx.coroutines.Dispatchers

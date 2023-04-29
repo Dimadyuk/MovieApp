@@ -1,9 +1,7 @@
 package com.example.movieapp.presentation.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.movieapp.R
 import com.example.movieapp.databinding.ActivityMainBinding
 import com.example.movieapp.presentation.ui.fragments.MainFragment
