@@ -5,12 +5,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "popular_movie_info")
 data class MovieItemDbModel(
-    val adult: Boolean?,
-    val backdropPath: String?,
     @PrimaryKey
-    val id: Int?,
+    val id: Int,
+    val adult: Boolean?,
+    val backdropPath: String,
     val originalLanguage: String?,
-    val originalTitle: String?,
+    val originalTitle: String,
     val overview: String?,
     val popularity: Double?,
     val posterPath: String?,
