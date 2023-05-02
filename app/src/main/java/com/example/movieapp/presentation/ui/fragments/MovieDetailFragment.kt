@@ -41,7 +41,7 @@ class MovieDetailFragment : Fragment() {
     private fun setValues(movieItem: MovieItem) {
         binding.movieTitle.text = movieItem.name
         binding.movieDescription.text = movieItem.overview
-        Picasso.get().load(movieItem.imageUrl).into(binding.ivLogo)
+        Picasso.get().load(movieItem.posterPath).into(binding.ivLogo)
     }
 
     override fun onCreateView(
