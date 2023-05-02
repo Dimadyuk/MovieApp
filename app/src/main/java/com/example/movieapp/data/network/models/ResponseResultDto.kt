@@ -3,7 +3,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-data class ResponsePopularResultDto(
+data class ResponseResultDto(
     @SerializedName("page")
     @Expose
     val page: Int? = null,

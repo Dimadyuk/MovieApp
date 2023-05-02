@@ -11,31 +11,31 @@ import com.example.movieapp.R
 import com.example.movieapp.domain.MovieItem
 import com.squareup.picasso.Picasso
 
-class MainAdapter() :
-    RecyclerView.Adapter<MainAdapter.MovieInfoViewHolder>() {
+class TopAdapter() :
+    RecyclerView.Adapter<TopAdapter.TopMovieInfoViewHolder>() {
 
-    var movieInfoList: List<MovieItem> = listOf()
+    var topMovieInfoList: List<MovieItem> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieInfoViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopMovieInfoViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_movie,
                 parent,
                 false
             )
-        return MovieInfoViewHolder(view)
+        return TopMovieInfoViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return movieInfoList.size
+        return topMovieInfoList.size
     }
 
-    override fun onBindViewHolder(holder: MovieInfoViewHolder, position: Int) {
-        val movieItem = movieInfoList[position]
+    override fun onBindViewHolder(holder: TopMovieInfoViewHolder, position: Int) {
+        val movieItem = topMovieInfoList[position]
         try {
             holder.tvTitle.text = movieItem.name
             Picasso.get().load(movieItem.imageUrl).into(holder.ivLogo)
@@ -46,7 +46,7 @@ class MainAdapter() :
     }
 
 
-    inner class MovieInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class TopMovieInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvTitle: TextView = itemView.findViewById(R.id.tv_title)
         val ivLogo: ImageView = itemView.findViewById(R.id.iv_movie)
     }

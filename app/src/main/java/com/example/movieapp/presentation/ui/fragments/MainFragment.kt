@@ -12,7 +12,8 @@ import com.example.movieapp.presentation.ui.MainViewModel
 class MainFragment : Fragment() {
 
     private lateinit var viewModel: MainViewModel
-    private lateinit var mainAdapter: MainAdapter
+    private lateinit var popularAdapter: PopularAdapter
+    private lateinit var topAdapter: TopAdapter
     private val binding by lazy {
         FragmentMainBinding.inflate(layoutInflater)
     }
@@ -27,12 +28,25 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-        mainAdapter = MainAdapter()
-        binding.rvPopularMovies.adapter = mainAdapter
-        viewModel.movieList.observe(requireActivity()) {
-            mainAdapter.movieInfoList = it
-        }
+
+        setupObservers()
         viewModel.loadData()
+
+    }
+
+    private fun setupObservers() {
+        popularAdapter = PopularAdapter()
+        binding.rvPopularMovies.adapter = popularAdapter
+        viewModel.popularMovieList.observe(requireActivity()) {
+            popularAdapter.movieInfoList = it
+        }
+
+        topAdapter = TopAdapter()
+        binding.rvTopMovies.adapter = topAdapter
+        viewModel.topMovieList.observe(requireActivity()) {
+            topAdapter.topMovieInfoList = it
+        }
+
     }
 
     companion object {

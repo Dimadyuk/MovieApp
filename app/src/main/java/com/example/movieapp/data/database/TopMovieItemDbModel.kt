@@ -3,8 +3,8 @@ package com.example.movieapp.data.database
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "popular_movie_info")
-data class MovieItemDbModel(
+@Entity(tableName = "top_movie_info")
+data class TopMovieItemDbModel(
     @PrimaryKey
     val id: Int,
     val adult: Boolean?,

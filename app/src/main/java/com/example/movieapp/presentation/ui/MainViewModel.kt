@@ -8,15 +8,20 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.data.repositories.MovieRepositoryImpl
 import com.example.movieapp.domain.usecases.GetPopularMovieListUseCase
+import com.example.movieapp.domain.usecases.GetTopMovieListUseCase
 import com.example.movieapp.domain.usecases.LoadPopularMoviesUseCase
+import com.example.movieapp.domain.usecases.LoadTopRatedMoviesUseCase
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val application: Application) : AndroidViewModel(application) {
     private val repository = MovieRepositoryImpl(application)
     private val loadPopularMoviesUseCase = LoadPopularMoviesUseCase(repository)
+    private val loadTopRatedMoviesUseCase = LoadTopRatedMoviesUseCase(repository)
     private val getPopularMovieListUseCase = GetPopularMovieListUseCase(repository)
+    private val getTopMovieListUseCase = GetTopMovieListUseCase(repository)
 
-    val movieList = getPopularMovieListUseCase.invoke()
+    val popularMovieList = getPopularMovieListUseCase.invoke()
+    val topMovieList = getTopMovieListUseCase.invoke()
 
     private fun isNetworkAvailable(context: Context): Boolean {
         val connectivityManager =
@@ -32,6 +37,10 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
             viewModelScope.launch {
                 loadPopularMoviesUseCase()
             }
+            viewModelScope.launch {
+                loadTopRatedMoviesUseCase()
+            }
+
         }
 
     }

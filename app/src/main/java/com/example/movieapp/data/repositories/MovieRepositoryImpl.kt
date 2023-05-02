@@ -19,18 +19,38 @@ class MovieRepositoryImpl(application: Application) : MovieRepository {
             ApiFactory.apiService.loadPopularMovies()
         }
         val dbModelList = loadedList.results?.map {
-            mapper.mapDtoToDbModel(it)
+            mapper.mapPopularDtoToDbModel(it)
         }
         withContext(Dispatchers.IO) {
             dbModelList?.let {
-                movieInfoDao.insertMovieList(it)
+                movieInfoDao.insertPopularMovieList(it)
             }
         }
     }
 
     override fun getPopularMoviesList(): LiveData<List<MovieItem>> {
         return movieInfoDao.getPopularMovieList().map { list ->
-            list.map { mapper.mapDbModelToMovieItem(it) }
+            list.map { mapper.mapPopularDbModelToMovieItem(it) }
+        }
+    }
+
+    override suspend fun loadTopRatedMovies() {
+        val loadedList = withContext(Dispatchers.Default) {
+            ApiFactory.apiService.loadTopRatedMovies()
+        }
+        val dbModelList = loadedList.results?.map {
+            mapper.mapTopDtoToDbModel(it)
+        }
+        withContext(Dispatchers.IO) {
+            dbModelList?.let {
+                movieInfoDao.insertTopMovieList(it)
+            }
+        }
+    }
+
+    override fun getTopMoviesList(): LiveData<List<MovieItem>> {
+        return movieInfoDao.getTopMovieList().map { list ->
+            list.map { mapper.mapTopDbModelToMovieItem(it) }
         }
     }
 }

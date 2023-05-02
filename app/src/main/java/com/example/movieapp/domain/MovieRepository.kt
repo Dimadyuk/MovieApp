@@ -6,4 +6,7 @@ interface MovieRepository {
     suspend fun loadPopularMovies()
 
     fun getPopularMoviesList(): LiveData<List<MovieItem>>
+    suspend fun loadTopRatedMovies()
+
+    fun getTopMoviesList(): LiveData<List<MovieItem>>
 }

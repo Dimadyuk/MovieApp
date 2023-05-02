@@ -1,6 +1,6 @@
 package com.example.movieapp.data.network
 
-import com.example.movieapp.data.network.models.ResponsePopularResultDto
+import com.example.movieapp.data.network.models.ResponseResultDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -11,7 +11,14 @@ interface ApiService {
         @Query(QUERY_PARAM_API_KEY) apiKey: String = API_KEY,
         @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE,
         @Query(QUERY_PARAM_PAGE) page: String = "1"
-    ): ResponsePopularResultDto
+    ): ResponseResultDto
+
+    @GET("/3/movie/top_rated")
+    suspend fun loadTopRatedMovies(
+        @Query(QUERY_PARAM_API_KEY) apiKey: String = API_KEY,
+        @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE,
+        @Query(QUERY_PARAM_PAGE) page: String = "1"
+    ): ResponseResultDto
 
     companion object {
         private const val QUERY_PARAM_API_KEY = "api_key"

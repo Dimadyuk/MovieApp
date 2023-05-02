@@ -10,8 +10,16 @@ import androidx.room.Query
 interface MovieDao {
 
     @Query("SELECT * FROM popular_movie_info")
-    fun getPopularMovieList(): LiveData<List<MovieItemDbModel>>
+    fun getPopularMovieList(): LiveData<List<PopularMovieItemDbModel>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMovieList(movieList: List<MovieItemDbModel>)
+    fun insertPopularMovieList(movieList: List<PopularMovieItemDbModel>)
+
+    @Query("SELECT * FROM top_movie_info")
+    fun getTopMovieList(): LiveData<List<TopMovieItemDbModel>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertTopMovieList(movieList: List<TopMovieItemDbModel>)
+
+
 }
