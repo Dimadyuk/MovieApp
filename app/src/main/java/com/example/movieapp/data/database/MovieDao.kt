@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.movieapp.domain.MovieItem
 
 @Dao
 interface MovieDao {
@@ -20,6 +21,9 @@ interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTopMovieList(movieList: List<TopMovieItemDbModel>)
+
+    @Query("SELECT * FROM popular_movie_info WHERE id = :movieItemId LIMIT 1")
+    fun getMovieItem(movieItemId: Int): PopularMovieItemDbModel
 
 
 }

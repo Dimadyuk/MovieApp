@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentMainBinding
+import com.example.movieapp.domain.MovieItem
 import com.example.movieapp.presentation.ui.MainViewModel
 
 class MainFragment : Fragment() {
@@ -29,27 +31,52 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
+        setupAdapters()
         setupObservers()
         viewModel.loadData()
 
     }
 
-    private fun setupObservers() {
+    private fun setupAdapters() {
         popularAdapter = PopularAdapter()
+        popularAdapter.onMovieItemClickListener = object : PopularAdapter.OnItemClickListener{
+            override fun onItemClick(movieItem: MovieItem) {
+                val fragment = MovieDetailFragment.newInstance(movieItem.id)
+                launchFragment(fragment)
+            }
+        }
         binding.rvPopularMovies.adapter = popularAdapter
+
+        topAdapter = TopAdapter()
+        topAdapter.onMovieItemClickListener = object : TopAdapter.OnItemClickListener{
+            override fun onItemClick(movieItem: MovieItem) {
+                val fragment = MovieDetailFragment.newInstance(movieItem.id)
+                launchFragment(fragment)
+            }
+
+        }
+        binding.rvTopMovies.adapter = topAdapter
+    }
+
+    private fun launchFragment(fragment: Fragment) {
+        parentFragmentManager.popBackStack()
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.main_container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun setupObservers() {
         viewModel.popularMovieList.observe(requireActivity()) {
             popularAdapter.movieInfoList = it
         }
-
-        topAdapter = TopAdapter()
-        binding.rvTopMovies.adapter = topAdapter
         viewModel.topMovieList.observe(requireActivity()) {
             topAdapter.topMovieInfoList = it
         }
-
     }
 
     companion object {
         fun newInstance() = MainFragment()
     }
+
 }

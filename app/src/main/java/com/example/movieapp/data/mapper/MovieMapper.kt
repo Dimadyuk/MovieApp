@@ -28,7 +28,10 @@ class MovieMapper {
         return MovieItem(
             id = dbModel.id,
             name = dbModel.originalTitle,
-            imageUrl = dbModel.backdropPath
+            imageUrl = dbModel.backdropPath,
+            backdropPath = dbModel.backdropPath,
+            posterPath = dbModel.posterPath,
+            overview = dbModel.overview
         )
     }
 
@@ -52,7 +55,10 @@ class MovieMapper {
         return MovieItem(
             id = dbModel.id,
             name = dbModel.originalTitle,
-            imageUrl = dbModel.backdropPath
+            imageUrl = dbModel.backdropPath,
+            backdropPath = dbModel.backdropPath,
+            posterPath = dbModel.posterPath,
+            overview = dbModel.overview
         )
     }
 }

@@ -19,6 +19,8 @@ class PopularAdapter() :
             field = value
             notifyDataSetChanged()
         }
+    var onMovieItemClickListener: OnItemClickListener? = null
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieInfoViewHolder {
         val view =
@@ -42,9 +44,14 @@ class PopularAdapter() :
         } catch (e: Exception) {
             Log.d("MainViewModel", e.toString())
         }
-
+        holder.itemView.setOnClickListener {
+            onMovieItemClickListener?.onItemClick(movieItem)
+        }
     }
 
+    interface OnItemClickListener {
+        fun onItemClick(movieItem: MovieItem)
+    }
 
     inner class MovieInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvTitle: TextView = itemView.findViewById(R.id.tv_title)

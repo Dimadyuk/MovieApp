@@ -53,4 +53,9 @@ class MovieRepositoryImpl(application: Application) : MovieRepository {
             list.map { mapper.mapTopDbModelToMovieItem(it) }
         }
     }
+
+    override suspend fun getMovieItem(movieItemId: Int): MovieItem {
+        val dbModel = movieInfoDao.getMovieItem(movieItemId)
+        return mapper.mapPopularDbModelToMovieItem(dbModel)
+    }
 }

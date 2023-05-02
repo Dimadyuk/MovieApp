@@ -9,4 +9,5 @@ interface MovieRepository {
     suspend fun loadTopRatedMovies()
 
     fun getTopMoviesList(): LiveData<List<MovieItem>>
+    suspend fun getMovieItem(movieItemId: Int): MovieItem
 }
