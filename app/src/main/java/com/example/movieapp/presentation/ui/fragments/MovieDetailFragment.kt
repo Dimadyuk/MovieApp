@@ -11,6 +11,7 @@ import com.example.movieapp.databinding.FragmentMovieDetailBinding
 import com.example.movieapp.domain.MovieItem
 import com.example.movieapp.presentation.ui.MainViewModel
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MovieDetailFragment : Fragment() {
@@ -31,6 +32,13 @@ class MovieDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
+        binding.btnAddToFavorites.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.IO) {
+                val movieItem = viewModel.getMovieItem(movieId)
+                viewModel.addFavoriteMovieItemUseCase.invoke(movieItem)
+            }
+
+        }
         lifecycleScope.launch {
             val movieItem = viewModel.getMovieItem(movieId)
             setValues(movieItem)

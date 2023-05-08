@@ -1,5 +1,6 @@
 package com.example.movieapp.data.mapper
 
+import com.example.movieapp.data.database.FavoriteMovieItemDbModel
 import com.example.movieapp.data.database.MovieItemDbModel
 import com.example.movieapp.data.network.ApiFactory
 import com.example.movieapp.data.network.models.MovieItemDto
@@ -51,6 +52,37 @@ class MovieMapper {
             backdropPath = dbModel.backdropPath,
             posterPath = dbModel.posterPath,
             overview = dbModel.overview
+        )
+    }
+
+    fun mapFavoriteDbModelToMovieItem(dbModel: FavoriteMovieItemDbModel): MovieItem {
+        return MovieItem(
+            id = dbModel.id,
+            name = dbModel.originalTitle,
+            imageUrl = dbModel.backdropPath,
+            backdropPath = dbModel.backdropPath,
+            posterPath = dbModel.posterPath,
+            overview = dbModel.overview
+        )
+    }
+
+    fun mapMovieItemToFavoriteDbModel(movieItem: MovieItem): FavoriteMovieItemDbModel {
+        return FavoriteMovieItemDbModel(
+            id = movieItem.id,
+            backdropPath = movieItem.backdropPath,
+            originalLanguage = movieItem.name,
+            originalTitle = movieItem.name,
+            overview = movieItem.overview,
+            popularity = 1.0,
+            posterPath = movieItem.overview,
+            releaseDate = movieItem.overview,
+            title = movieItem.overview,
+            video = true,
+            voteAverage = 1.0,
+            voteCount = 1,
+            adult = true,
+            isTop = true,
+            isPopular = true
         )
     }
 }

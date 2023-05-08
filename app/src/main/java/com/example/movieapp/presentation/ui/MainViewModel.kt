@@ -8,6 +8,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.data.repositories.MovieRepositoryImpl
 import com.example.movieapp.domain.MovieItem
+import com.example.movieapp.domain.usecases.AddFavoriteMovieItemUseCase
+import com.example.movieapp.domain.usecases.GetFavoriteMovieListUseCase
 import com.example.movieapp.domain.usecases.GetMovieItemUseCase
 import com.example.movieapp.domain.usecases.GetPopularMovieListUseCase
 import com.example.movieapp.domain.usecases.GetTopMovieListUseCase
@@ -24,9 +26,12 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
     private val getPopularMovieListUseCase = GetPopularMovieListUseCase(repository)
     private val getTopMovieListUseCase = GetTopMovieListUseCase(repository)
     private val getMovieItemUseCase = GetMovieItemUseCase(repository)
+    private val getFavoriteMovieItemUseCase = GetFavoriteMovieListUseCase(repository)
+    val addFavoriteMovieItemUseCase = AddFavoriteMovieItemUseCase(repository)
 
     val popularMovieList = getPopularMovieListUseCase.invoke()
     val topMovieList = getTopMovieListUseCase.invoke()
+    val favoriteMovieList = getFavoriteMovieItemUseCase.invoke()
 
 
     private fun isNetworkAvailable(context: Context): Boolean {

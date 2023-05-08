@@ -16,6 +16,7 @@ class MainFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
     private lateinit var popularAdapter: PopularAdapter
     private lateinit var topAdapter: TopAdapter
+    private lateinit var favoriteAdapter: FavoriteAdapter
     private val binding by lazy {
         FragmentMainBinding.inflate(layoutInflater)
     }
@@ -34,12 +35,11 @@ class MainFragment : Fragment() {
         setupAdapters()
         setupObservers()
         viewModel.loadData()
-
     }
 
     private fun setupAdapters() {
         popularAdapter = PopularAdapter()
-        popularAdapter.onMovieItemClickListener = object : PopularAdapter.OnItemClickListener{
+        popularAdapter.onMovieItemClickListener = object : PopularAdapter.OnItemClickListener {
             override fun onItemClick(movieItem: MovieItem) {
                 val fragment = MovieDetailFragment.newInstance(movieItem.id)
                 launchFragment(fragment)
@@ -48,14 +48,22 @@ class MainFragment : Fragment() {
         binding.rvPopularMovies.adapter = popularAdapter
 
         topAdapter = TopAdapter()
-        topAdapter.onMovieItemClickListener = object : TopAdapter.OnItemClickListener{
+        topAdapter.onMovieItemClickListener = object : TopAdapter.OnItemClickListener {
             override fun onItemClick(movieItem: MovieItem) {
                 val fragment = MovieDetailFragment.newInstance(movieItem.id)
                 launchFragment(fragment)
             }
-
         }
         binding.rvTopMovies.adapter = topAdapter
+
+        favoriteAdapter = FavoriteAdapter()
+        favoriteAdapter.onMovieItemClickListener = object : FavoriteAdapter.OnItemClickListener {
+            override fun onItemClick(movieItem: MovieItem) {
+                val fragment = MovieDetailFragment.newInstance(movieItem.id)
+                launchFragment(fragment)
+            }
+        }
+        binding.rvMyFavouritesMovies.adapter = favoriteAdapter
     }
 
     private fun launchFragment(fragment: Fragment) {
@@ -72,6 +80,9 @@ class MainFragment : Fragment() {
         }
         viewModel.topMovieList.observe(requireActivity()) {
             topAdapter.topMovieInfoList = it
+        }
+        viewModel.favoriteMovieList.observe(requireActivity()) {
+            favoriteAdapter.favoriteMovieInfoList = it
         }
     }
 

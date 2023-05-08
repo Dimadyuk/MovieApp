@@ -58,4 +58,15 @@ class MovieRepositoryImpl(application: Application) : MovieRepository {
         val dbModel = movieInfoDao.getMovieItem(movieItemId)
         return mapper.mapDbModelToMovieItem(dbModel)
     }
+
+    override fun getFavoriteMoviesList(): LiveData<List<MovieItem>> {
+        return movieInfoDao.getFavoriteMovieList().map { list ->
+            list.map { mapper.mapFavoriteDbModelToMovieItem(it) }
+        }
+    }
+
+    override suspend fun addFavoriteMovieItem(movieItem: MovieItem) {
+
+        movieInfoDao.addFavoriteMovieItem(mapper.mapMovieItemToFavoriteDbModel(movieItem))
+    }
 }
