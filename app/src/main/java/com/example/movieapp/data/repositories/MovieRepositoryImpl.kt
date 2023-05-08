@@ -30,7 +30,7 @@ class MovieRepositoryImpl(application: Application) : MovieRepository {
 
     override fun getPopularMoviesList(): LiveData<List<MovieItem>> {
         return movieInfoDao.getPopularMovieList().map { list ->
-            list.map { mapper.mapPopularDbModelToMovieItem(it) }
+            list.map { mapper.mapDbModelToMovieItem(it) }
         }
     }
 
@@ -50,12 +50,12 @@ class MovieRepositoryImpl(application: Application) : MovieRepository {
 
     override fun getTopMoviesList(): LiveData<List<MovieItem>> {
         return movieInfoDao.getTopMovieList().map { list ->
-            list.map { mapper.mapTopDbModelToMovieItem(it) }
+            list.map { mapper.mapDbModelToMovieItem(it) }
         }
     }
 
     override suspend fun getMovieItem(movieItemId: Int): MovieItem {
         val dbModel = movieInfoDao.getMovieItem(movieItemId)
-        return mapper.mapPopularDbModelToMovieItem(dbModel)
+        return mapper.mapDbModelToMovieItem(dbModel)
     }
 }

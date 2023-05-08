@@ -25,17 +25,6 @@ class MovieMapper {
         isTop = false
     )
 
-    fun mapPopularDbModelToMovieItem(dbModel: MovieItemDbModel): MovieItem {
-        return MovieItem(
-            id = dbModel.id,
-            name = dbModel.originalTitle,
-            imageUrl = dbModel.backdropPath,
-            backdropPath = dbModel.backdropPath,
-            posterPath = dbModel.posterPath,
-            overview = dbModel.overview
-        )
-    }
-
     fun mapTopDtoToDbModel(dto: MovieItemDto) = MovieItemDbModel(
         adult = dto.adult,
         backdropPath = ApiFactory.BASE_IMAGE_URL + dto.backdropPath,
@@ -54,7 +43,7 @@ class MovieMapper {
         isTop = true
     )
 
-    fun mapTopDbModelToMovieItem(dbModel: MovieItemDbModel): MovieItem {
+    fun mapDbModelToMovieItem(dbModel: MovieItemDbModel): MovieItem {
         return MovieItem(
             id = dbModel.id,
             name = dbModel.originalTitle,
