@@ -6,7 +6,8 @@ data class MovieItem(
     val imageUrl: String,
     val backdropPath: String,
     val posterPath: String?,
-    val overview: String?
+    val overview: String?,
+    val isFavorite: Boolean
 ){
     companion object{
         const val UNDEFINED_ID = 0

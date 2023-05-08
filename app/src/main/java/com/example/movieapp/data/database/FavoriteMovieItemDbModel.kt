@@ -19,6 +19,4 @@ data class FavoriteMovieItemDbModel(
     val video: Boolean?,
     val voteAverage: Double?,
     val voteCount: Int?,
-    val isPopular: Boolean,
-    val isTop: Boolean
 )

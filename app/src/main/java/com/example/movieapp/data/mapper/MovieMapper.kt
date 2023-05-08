@@ -51,7 +51,8 @@ class MovieMapper {
             imageUrl = dbModel.backdropPath,
             backdropPath = dbModel.backdropPath,
             posterPath = dbModel.posterPath,
-            overview = dbModel.overview
+            overview = dbModel.overview,
+            isFavorite = false
         )
     }
 
@@ -62,27 +63,26 @@ class MovieMapper {
             imageUrl = dbModel.backdropPath,
             backdropPath = dbModel.backdropPath,
             posterPath = dbModel.posterPath,
-            overview = dbModel.overview
+            overview = dbModel.overview,
+            isFavorite = true
         )
     }
 
-    fun mapMovieItemToFavoriteDbModel(movieItem: MovieItem): FavoriteMovieItemDbModel {
+    fun mapDbModelToFavoriteDbModel(movieItem: MovieItemDbModel): FavoriteMovieItemDbModel {
         return FavoriteMovieItemDbModel(
             id = movieItem.id,
+            adult = movieItem.adult,
             backdropPath = movieItem.backdropPath,
-            originalLanguage = movieItem.name,
-            originalTitle = movieItem.name,
+            originalLanguage = movieItem.originalLanguage,
+            originalTitle = movieItem.originalTitle,
             overview = movieItem.overview,
-            popularity = 1.0,
-            posterPath = movieItem.overview,
-            releaseDate = movieItem.overview,
-            title = movieItem.overview,
-            video = true,
-            voteAverage = 1.0,
-            voteCount = 1,
-            adult = true,
-            isTop = true,
-            isPopular = true
+            popularity = movieItem.popularity,
+            posterPath = movieItem.posterPath,
+            releaseDate = movieItem.releaseDate,
+            title = movieItem.title,
+            video = movieItem.video,
+            voteAverage = movieItem.voteAverage,
+            voteCount = movieItem.voteCount,
         )
     }
 }

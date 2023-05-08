@@ -65,8 +65,19 @@ class MovieRepositoryImpl(application: Application) : MovieRepository {
         }
     }
 
-    override suspend fun addFavoriteMovieItem(movieItem: MovieItem) {
+    override suspend fun addFavoriteMovieItem(movieItemId: Int) {
+        val dbModel = movieInfoDao.getMovieItem(movieItemId)
+        movieInfoDao.addFavoriteMovieItem(mapper.mapDbModelToFavoriteDbModel(dbModel))
+    }
 
-        movieInfoDao.addFavoriteMovieItem(mapper.mapMovieItemToFavoriteDbModel(movieItem))
+    override suspend fun getFavoriteMovieItem(movieItemId: Int): MovieItem? {
+        return movieInfoDao.getFavoriteMovieItem(movieItemId)?.let {
+            mapper.mapFavoriteDbModelToMovieItem(it)
+        }
+
+    }
+
+    override suspend fun deleteFavoriteMovieItem(movieItemId: Int) {
+        movieInfoDao.deleteFavoriteMovieItem(movieItemId)
     }
 }

@@ -68,10 +68,8 @@ class MainFragment : Fragment() {
 
     private fun launchFragment(fragment: Fragment) {
         parentFragmentManager.popBackStack()
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.main_container, fragment)
-            .addToBackStack(null)
-            .commit()
+        parentFragmentManager.beginTransaction().replace(R.id.main_container, fragment)
+            .addToBackStack(null).commit()
     }
 
     private fun setupObservers() {

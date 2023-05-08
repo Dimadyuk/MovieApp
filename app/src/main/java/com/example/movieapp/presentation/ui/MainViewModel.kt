@@ -9,6 +9,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.movieapp.data.repositories.MovieRepositoryImpl
 import com.example.movieapp.domain.MovieItem
 import com.example.movieapp.domain.usecases.AddFavoriteMovieItemUseCase
+import com.example.movieapp.domain.usecases.DeleteFavoriteMovieItemUseCase
+import com.example.movieapp.domain.usecases.GetFavoriteMovieItemUseCase
 import com.example.movieapp.domain.usecases.GetFavoriteMovieListUseCase
 import com.example.movieapp.domain.usecases.GetMovieItemUseCase
 import com.example.movieapp.domain.usecases.GetPopularMovieListUseCase
@@ -21,17 +23,22 @@ import kotlinx.coroutines.withContext
 
 class MainViewModel(private val application: Application) : AndroidViewModel(application) {
     private val repository = MovieRepositoryImpl(application)
+
     private val loadPopularMoviesUseCase = LoadPopularMoviesUseCase(repository)
     private val loadTopRatedMoviesUseCase = LoadTopRatedMoviesUseCase(repository)
+
     private val getPopularMovieListUseCase = GetPopularMovieListUseCase(repository)
     private val getTopMovieListUseCase = GetTopMovieListUseCase(repository)
+    private val getFavoriteMovieListUseCase = GetFavoriteMovieListUseCase(repository)
+
     private val getMovieItemUseCase = GetMovieItemUseCase(repository)
-    private val getFavoriteMovieItemUseCase = GetFavoriteMovieListUseCase(repository)
+    private val getFavoriteMovieItemUseCase = GetFavoriteMovieItemUseCase(repository)
+    val deleteFavoriteMovieItemUseCase = DeleteFavoriteMovieItemUseCase(repository)
     val addFavoriteMovieItemUseCase = AddFavoriteMovieItemUseCase(repository)
 
     val popularMovieList = getPopularMovieListUseCase.invoke()
     val topMovieList = getTopMovieListUseCase.invoke()
-    val favoriteMovieList = getFavoriteMovieItemUseCase.invoke()
+    val favoriteMovieList = getFavoriteMovieListUseCase.invoke()
 
 
     private fun isNetworkAvailable(context: Context): Boolean {
@@ -45,7 +52,7 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
 
     suspend fun getMovieItem(movieId: Int): MovieItem {
         return withContext(viewModelScope.coroutineContext + Dispatchers.IO) {
-            getMovieItemUseCase.invoke(movieId)
+            getFavoriteMovieItemUseCase.invoke(movieId) ?: getMovieItemUseCase.invoke(movieId)
         }
 
     }

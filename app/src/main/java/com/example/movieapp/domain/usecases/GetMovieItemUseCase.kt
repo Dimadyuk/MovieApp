@@ -1,6 +1,5 @@
 package com.example.movieapp.domain.usecases
 
-import androidx.lifecycle.LiveData
 import com.example.movieapp.domain.MovieItem
 import com.example.movieapp.domain.MovieRepository
 

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentMovieDetailBinding
 import com.example.movieapp.domain.MovieItem
 import com.example.movieapp.presentation.ui.MainViewModel
@@ -21,6 +22,7 @@ class MovieDetailFragment : Fragment() {
 
     private lateinit var viewModel: MainViewModel
     private var movieId: Int = MovieItem.UNDEFINED_ID
+    private var isFavorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +36,17 @@ class MovieDetailFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         binding.btnAddToFavorites.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
-                val movieItem = viewModel.getMovieItem(movieId)
-                viewModel.addFavoriteMovieItemUseCase.invoke(movieItem)
-            }
+                isFavorite = if (isFavorite) {
+                    viewModel.deleteFavoriteMovieItemUseCase.invoke(movieId)
+                    binding.btnAddToFavorites.setImageResource(R.drawable.is_not_favorite)
+                    false
+                } else {
+                    viewModel.addFavoriteMovieItemUseCase.invoke(movieId)
+                    binding.btnAddToFavorites.setImageResource(R.drawable.is_favorite)
+                    true
+                }
 
+            }
         }
         lifecycleScope.launch {
             val movieItem = viewModel.getMovieItem(movieId)
@@ -49,6 +58,14 @@ class MovieDetailFragment : Fragment() {
     private fun setValues(movieItem: MovieItem) {
         binding.movieTitle.text = movieItem.name
         binding.movieDescription.text = movieItem.overview
+        if (movieItem.isFavorite) {
+            isFavorite = true
+            binding.btnAddToFavorites.setImageResource(R.drawable.is_favorite)
+        } else {
+            isFavorite = false
+            binding.btnAddToFavorites.setImageResource(R.drawable.is_not_favorite)
+        }
+
         Picasso.get().load(movieItem.posterPath).into(binding.ivLogo)
     }
 
