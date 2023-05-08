@@ -1,14 +1,13 @@
 package com.example.movieapp.data.mapper
 
-import com.example.movieapp.data.database.PopularMovieItemDbModel
-import com.example.movieapp.data.database.TopMovieItemDbModel
+import com.example.movieapp.data.database.MovieItemDbModel
 import com.example.movieapp.data.network.ApiFactory
 import com.example.movieapp.data.network.models.MovieItemDto
 import com.example.movieapp.domain.MovieItem
 
 class MovieMapper {
 
-    fun mapPopularDtoToDbModel(dto: MovieItemDto) = PopularMovieItemDbModel(
+    fun mapPopularDtoToDbModel(dto: MovieItemDto) = MovieItemDbModel(
         adult = dto.adult,
         backdropPath = ApiFactory.BASE_IMAGE_URL + dto.backdropPath,
         id = dto.id ?: -1,
@@ -22,9 +21,11 @@ class MovieMapper {
         video = dto.video,
         voteAverage = dto.voteAverage,
         voteCount = dto.voteCount,
+        isPopular = true,
+        isTop = false
     )
 
-    fun mapPopularDbModelToMovieItem(dbModel: PopularMovieItemDbModel): MovieItem {
+    fun mapPopularDbModelToMovieItem(dbModel: MovieItemDbModel): MovieItem {
         return MovieItem(
             id = dbModel.id,
             name = dbModel.originalTitle,
@@ -35,7 +36,7 @@ class MovieMapper {
         )
     }
 
-    fun mapTopDtoToDbModel(dto: MovieItemDto) = TopMovieItemDbModel(
+    fun mapTopDtoToDbModel(dto: MovieItemDto) = MovieItemDbModel(
         adult = dto.adult,
         backdropPath = ApiFactory.BASE_IMAGE_URL + dto.backdropPath,
         id = dto.id ?: -1,
@@ -49,9 +50,11 @@ class MovieMapper {
         video = dto.video,
         voteAverage = dto.voteAverage,
         voteCount = dto.voteCount,
+        isPopular = false,
+        isTop = true
     )
 
-    fun mapTopDbModelToMovieItem(dbModel: TopMovieItemDbModel): MovieItem {
+    fun mapTopDbModelToMovieItem(dbModel: MovieItemDbModel): MovieItem {
         return MovieItem(
             id = dbModel.id,
             name = dbModel.originalTitle,
