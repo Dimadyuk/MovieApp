@@ -40,6 +40,9 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
     val topMovieList = getTopMovieListUseCase.invoke()
     val favoriteMovieList = getFavoriteMovieListUseCase.invoke()
 
+    init {
+        loadData()
+    }
 
     private fun isNetworkAvailable(context: Context): Boolean {
         val connectivityManager =
@@ -54,19 +57,27 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
         return withContext(viewModelScope.coroutineContext + Dispatchers.IO) {
             getFavoriteMovieItemUseCase.invoke(movieId) ?: getMovieItemUseCase.invoke(movieId)
         }
-
     }
 
     fun loadData() {
+        loadPopularMovies()
+        loadTopMovies()
+    }
+
+    fun loadPopularMovies() {
         if (isNetworkAvailable(application)) {
             viewModelScope.launch {
                 loadPopularMoviesUseCase()
             }
+        }
+    }
+
+    fun loadTopMovies() {
+        if (isNetworkAvailable(application)) {
             viewModelScope.launch {
                 loadTopRatedMoviesUseCase()
             }
-
         }
-
     }
+
 }

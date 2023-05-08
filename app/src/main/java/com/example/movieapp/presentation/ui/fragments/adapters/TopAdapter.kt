@@ -1,4 +1,4 @@
-package com.example.movieapp.presentation.ui.fragments
+package com.example.movieapp.presentation.ui.fragments.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -6,37 +6,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
 import com.example.movieapp.domain.MovieItem
 import com.squareup.picasso.Picasso
 
-class FavoriteAdapter() :
-    RecyclerView.Adapter<FavoriteAdapter.FavoriteMovieInfoViewHolder>() {
+class TopAdapter() :
+    ListAdapter<MovieItem, TopAdapter.TopMovieInfoViewHolder>(MovieItemDiffCallBack()) {
 
-    var favoriteMovieInfoList: List<MovieItem> = listOf()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
     var onMovieItemClickListener: OnItemClickListener? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteMovieInfoViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopMovieInfoViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_movie,
                 parent,
                 false
             )
-        return FavoriteMovieInfoViewHolder(view)
+        return TopMovieInfoViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return favoriteMovieInfoList.size
-    }
-
-    override fun onBindViewHolder(holder: FavoriteMovieInfoViewHolder, position: Int) {
-        val movieItem = favoriteMovieInfoList[position]
+    override fun onBindViewHolder(holder: TopMovieInfoViewHolder, position: Int) {
+        val movieItem = getItem(position)
         try {
             holder.tvTitle.text = movieItem.name
             Picasso.get().load(movieItem.imageUrl).into(holder.ivLogo)
@@ -53,7 +45,7 @@ class FavoriteAdapter() :
         fun onItemClick(movieItem: MovieItem)
     }
 
-    inner class FavoriteMovieInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class TopMovieInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvTitle: TextView = itemView.findViewById(R.id.tv_title)
         val ivLogo: ImageView = itemView.findViewById(R.id.iv_movie)
     }

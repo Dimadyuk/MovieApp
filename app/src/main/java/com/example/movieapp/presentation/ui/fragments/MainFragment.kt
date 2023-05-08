@@ -10,6 +10,9 @@ import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentMainBinding
 import com.example.movieapp.domain.MovieItem
 import com.example.movieapp.presentation.ui.MainViewModel
+import com.example.movieapp.presentation.ui.fragments.adapters.FavoriteAdapter
+import com.example.movieapp.presentation.ui.fragments.adapters.PopularAdapter
+import com.example.movieapp.presentation.ui.fragments.adapters.TopAdapter
 
 class MainFragment : Fragment() {
 
@@ -34,7 +37,7 @@ class MainFragment : Fragment() {
 
         setupAdapters()
         setupObservers()
-        viewModel.loadData()
+
     }
 
     private fun setupAdapters() {
@@ -46,6 +49,11 @@ class MainFragment : Fragment() {
             }
         }
         binding.rvPopularMovies.adapter = popularAdapter
+        //TODO need to add swipeListener
+//        binding.swipePopularMovies.setOnRefreshListener {
+//            viewModel.loadPopularMovies()
+//            binding.swipePopularMovies.isRefreshing = false
+//        }
 
         topAdapter = TopAdapter()
         topAdapter.onMovieItemClickListener = object : TopAdapter.OnItemClickListener {
@@ -55,6 +63,11 @@ class MainFragment : Fragment() {
             }
         }
         binding.rvTopMovies.adapter = topAdapter
+        //TODO need to add swipeListener
+//        binding.swipeTopMovies.setOnRefreshListener {
+//            viewModel.loadTopMovies()
+//            binding.swipeTopMovies.isRefreshing = false
+//        }
 
         favoriteAdapter = FavoriteAdapter()
         favoriteAdapter.onMovieItemClickListener = object : FavoriteAdapter.OnItemClickListener {
@@ -74,13 +87,13 @@ class MainFragment : Fragment() {
 
     private fun setupObservers() {
         viewModel.popularMovieList.observe(requireActivity()) {
-            popularAdapter.movieInfoList = it
+            popularAdapter.submitList(it)
         }
         viewModel.topMovieList.observe(requireActivity()) {
-            topAdapter.topMovieInfoList = it
+            topAdapter.submitList(it)
         }
         viewModel.favoriteMovieList.observe(requireActivity()) {
-            favoriteAdapter.favoriteMovieInfoList = it
+            favoriteAdapter.submitList(it)
         }
     }
 

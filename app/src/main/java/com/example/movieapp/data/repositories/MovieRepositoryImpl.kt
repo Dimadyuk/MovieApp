@@ -1,6 +1,7 @@
 package com.example.movieapp.data.repositories
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.example.movieapp.data.database.AppDatabase
@@ -24,6 +25,7 @@ class MovieRepositoryImpl(application: Application) : MovieRepository {
         withContext(Dispatchers.IO) {
             dbModelList?.let {
                 movieInfoDao.insertPopularMovieList(it)
+                Log.d("MainViewModel", it.toString())
             }
         }
     }
@@ -44,6 +46,7 @@ class MovieRepositoryImpl(application: Application) : MovieRepository {
         withContext(Dispatchers.IO) {
             dbModelList?.let {
                 movieInfoDao.insertTopMovieList(it)
+                Log.d("MainViewModel", it.toString())
             }
         }
     }

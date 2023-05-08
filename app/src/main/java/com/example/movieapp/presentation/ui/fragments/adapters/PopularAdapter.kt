@@ -1,4 +1,4 @@
-package com.example.movieapp.presentation.ui.fragments
+package com.example.movieapp.presentation.ui.fragments.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -6,37 +6,30 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
 import com.example.movieapp.domain.MovieItem
 import com.squareup.picasso.Picasso
 
-class TopAdapter() :
-    RecyclerView.Adapter<TopAdapter.TopMovieInfoViewHolder>() {
+class PopularAdapter() :
+    ListAdapter<MovieItem, PopularAdapter.MovieInfoViewHolder>(MovieItemDiffCallBack()) {
 
-    var topMovieInfoList: List<MovieItem> = listOf()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
     var onMovieItemClickListener: OnItemClickListener? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopMovieInfoViewHolder {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieInfoViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_movie,
                 parent,
                 false
             )
-        return TopMovieInfoViewHolder(view)
+        return MovieInfoViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return topMovieInfoList.size
-    }
-
-    override fun onBindViewHolder(holder: TopMovieInfoViewHolder, position: Int) {
-        val movieItem = topMovieInfoList[position]
+    override fun onBindViewHolder(holder: MovieInfoViewHolder, position: Int) {
+        val movieItem = getItem(position)
         try {
             holder.tvTitle.text = movieItem.name
             Picasso.get().load(movieItem.imageUrl).into(holder.ivLogo)
@@ -46,14 +39,13 @@ class TopAdapter() :
         holder.itemView.setOnClickListener {
             onMovieItemClickListener?.onItemClick(movieItem)
         }
-
     }
 
     interface OnItemClickListener {
         fun onItemClick(movieItem: MovieItem)
     }
 
-    inner class TopMovieInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MovieInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvTitle: TextView = itemView.findViewById(R.id.tv_title)
         val ivLogo: ImageView = itemView.findViewById(R.id.iv_movie)
     }
