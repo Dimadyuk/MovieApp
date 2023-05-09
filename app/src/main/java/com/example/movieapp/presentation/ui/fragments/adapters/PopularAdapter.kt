@@ -32,7 +32,11 @@ class PopularAdapter() :
         val movieItem = getItem(position)
         try {
             holder.tvTitle.text = movieItem.name
-            Picasso.get().load(movieItem.imageUrl).into(holder.ivLogo)
+            Picasso.get()
+                .load(movieItem.imageUrl)
+                .resize(150,150)
+                .centerCrop()
+                .into(holder.ivLogo)
         } catch (e: Exception) {
             Log.d("MainViewModel", e.toString())
         }
