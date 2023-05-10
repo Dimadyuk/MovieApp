@@ -1,4 +1,4 @@
-package com.example.movieapp.domain.usecases
+package com.example.movieapp.domain.usecases.getlists
 
 import com.example.movieapp.domain.MovieRepository
 

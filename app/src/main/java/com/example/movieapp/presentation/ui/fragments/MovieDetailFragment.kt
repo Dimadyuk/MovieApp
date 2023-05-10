@@ -59,7 +59,7 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setValues(movieItem: MovieItem) {
-        binding.movieTitle.text = movieItem.name
+        binding.movieTitle.text = movieItem.originalTitle
         binding.movieDescription.text = movieItem.overview
         setFavoriteIcon(movieItem.isFavorite)
         setClickListeners(movieItem.isFavorite)

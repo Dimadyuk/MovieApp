@@ -6,10 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.data.repositories.MovieRepositoryImpl
 import com.example.movieapp.domain.MovieItem
-import com.example.movieapp.domain.usecases.AddFavoriteMovieItemUseCase
-import com.example.movieapp.domain.usecases.DeleteFavoriteMovieItemUseCase
-import com.example.movieapp.domain.usecases.GetFavoriteMovieItemUseCase
-import com.example.movieapp.domain.usecases.GetMovieItemUseCase
+import com.example.movieapp.domain.usecases.itemusecases.AddFavoriteMovieItemUseCase
+import com.example.movieapp.domain.usecases.itemusecases.DeleteFavoriteMovieItemUseCase
+import com.example.movieapp.domain.usecases.itemusecases.GetFavoriteMovieItemUseCase
+import com.example.movieapp.domain.usecases.itemusecases.GetMovieItemUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

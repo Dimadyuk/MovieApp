@@ -47,9 +47,8 @@ class MovieMapper {
     fun mapDbModelToMovieItem(dbModel: MovieItemDbModel): MovieItem {
         return MovieItem(
             id = dbModel.id,
-            name = dbModel.originalTitle,
+            originalTitle = dbModel.originalTitle,
             imageUrl = dbModel.backdropPath,
-            backdropPath = dbModel.backdropPath,
             posterPath = dbModel.posterPath,
             overview = dbModel.overview,
             isFavorite = false
@@ -59,9 +58,8 @@ class MovieMapper {
     fun mapFavoriteDbModelToMovieItem(dbModel: FavoriteMovieItemDbModel): MovieItem {
         return MovieItem(
             id = dbModel.id,
-            name = dbModel.originalTitle,
+            originalTitle = dbModel.originalTitle,
             imageUrl = dbModel.backdropPath,
-            backdropPath = dbModel.backdropPath,
             posterPath = dbModel.posterPath,
             overview = dbModel.overview,
             isFavorite = true

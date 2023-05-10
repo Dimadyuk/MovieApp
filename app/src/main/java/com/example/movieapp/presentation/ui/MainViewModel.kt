@@ -5,23 +5,14 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.data.repositories.MovieRepositoryImpl
-import com.example.movieapp.domain.MovieItem
-import com.example.movieapp.domain.usecases.AddFavoriteMovieItemUseCase
-import com.example.movieapp.domain.usecases.DeleteFavoriteMovieItemUseCase
-import com.example.movieapp.domain.usecases.GetFavoriteMovieItemUseCase
-import com.example.movieapp.domain.usecases.GetFavoriteMovieListUseCase
-import com.example.movieapp.domain.usecases.GetMovieItemUseCase
-import com.example.movieapp.domain.usecases.GetPopularMovieListUseCase
-import com.example.movieapp.domain.usecases.GetTopMovieListUseCase
-import com.example.movieapp.domain.usecases.LoadPopularMoviesUseCase
-import com.example.movieapp.domain.usecases.LoadTopRatedMoviesUseCase
-import kotlinx.coroutines.Dispatchers
+import com.example.movieapp.domain.usecases.getlists.GetFavoriteMovieListUseCase
+import com.example.movieapp.domain.usecases.getlists.GetPopularMovieListUseCase
+import com.example.movieapp.domain.usecases.getlists.GetTopMovieListUseCase
+import com.example.movieapp.domain.usecases.loadlists.LoadPopularMoviesUseCase
+import com.example.movieapp.domain.usecases.loadlists.LoadTopRatedMoviesUseCase
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainViewModel(private val application: Application) : AndroidViewModel(application) {
     private val repository = MovieRepositoryImpl(application)

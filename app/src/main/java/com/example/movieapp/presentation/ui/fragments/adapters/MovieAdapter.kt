@@ -30,7 +30,7 @@ class MovieAdapter() :
     override fun onBindViewHolder(holder: MovieInfoViewHolder, position: Int) {
         val movieItem = getItem(position)
         try {
-            holder.tvTitle.text = movieItem.name
+            holder.tvTitle.text = movieItem.originalTitle
             Picasso.get()
                 .load(movieItem.imageUrl)
                 .resize(150,150)
