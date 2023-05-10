@@ -2,8 +2,6 @@ package com.example.movieapp.presentation.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -12,16 +10,14 @@ import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentMainBinding
 import com.example.movieapp.domain.MovieItem
 import com.example.movieapp.presentation.ui.MainViewModel
-import com.example.movieapp.presentation.ui.fragments.adapters.FavoriteAdapter
-import com.example.movieapp.presentation.ui.fragments.adapters.PopularAdapter
-import com.example.movieapp.presentation.ui.fragments.adapters.TopAdapter
+import com.example.movieapp.presentation.ui.fragments.adapters.MovieAdapter
 
 class MainFragment : Fragment() {
 
     private lateinit var viewModel: MainViewModel
-    private lateinit var popularAdapter: PopularAdapter
-    private lateinit var topAdapter: TopAdapter
-    private lateinit var favoriteAdapter: FavoriteAdapter
+    private lateinit var popularAdapter: MovieAdapter
+    private lateinit var topAdapter: MovieAdapter
+    private lateinit var favoriteAdapter: MovieAdapter
     private val binding by lazy {
         FragmentMainBinding.inflate(layoutInflater)
     }
@@ -43,8 +39,8 @@ class MainFragment : Fragment() {
     }
 
     private fun setupAdapters() {
-        popularAdapter = PopularAdapter()
-        popularAdapter.onMovieItemClickListener = object : PopularAdapter.OnItemClickListener {
+        popularAdapter = MovieAdapter()
+        popularAdapter.onMovieItemClickListener = object : MovieAdapter.OnItemClickListener {
             override fun onItemClick(movieItem: MovieItem) {
                 val fragment = MovieDetailFragment.newInstance(movieItem.id)
                 launchFragment(fragment)
@@ -57,8 +53,8 @@ class MainFragment : Fragment() {
 //            binding.swipePopularMovies.isRefreshing = false
 //        }
 
-        topAdapter = TopAdapter()
-        topAdapter.onMovieItemClickListener = object : TopAdapter.OnItemClickListener {
+        topAdapter = MovieAdapter()
+        topAdapter.onMovieItemClickListener = object : MovieAdapter.OnItemClickListener {
             override fun onItemClick(movieItem: MovieItem) {
                 val fragment = MovieDetailFragment.newInstance(movieItem.id)
                 launchFragment(fragment)
@@ -71,8 +67,8 @@ class MainFragment : Fragment() {
 //            binding.swipeTopMovies.isRefreshing = false
 //        }
 
-        favoriteAdapter = FavoriteAdapter()
-        favoriteAdapter.onMovieItemClickListener = object : FavoriteAdapter.OnItemClickListener {
+        favoriteAdapter = MovieAdapter()
+        favoriteAdapter.onMovieItemClickListener = object : MovieAdapter.OnItemClickListener {
             override fun onItemClick(movieItem: MovieItem) {
                 val fragment = MovieDetailFragment.newInstance(movieItem.id)
                 launchFragment(fragment)

@@ -12,11 +12,10 @@ import com.example.movieapp.R
 import com.example.movieapp.domain.MovieItem
 import com.squareup.picasso.Picasso
 
-class PopularAdapter() :
-    ListAdapter<MovieItem, PopularAdapter.MovieInfoViewHolder>(MovieItemDiffCallBack()) {
+class MovieAdapter() :
+    ListAdapter<MovieItem, MovieAdapter.MovieInfoViewHolder>(MovieItemDiffCallBack()) {
 
     var onMovieItemClickListener: OnItemClickListener? = null
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieInfoViewHolder {
         val view =
@@ -43,6 +42,7 @@ class PopularAdapter() :
         holder.itemView.setOnClickListener {
             onMovieItemClickListener?.onItemClick(movieItem)
         }
+
     }
 
     interface OnItemClickListener {
