@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Movie App</string>
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
+    <string name="prompt_login">Enter User Login</string>
+    <string name="prompt_password">Enter User Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome!"</string>
@@ -18,4 +18,13 @@
     <string name="poster_of_movie">poster of movie</string>
     <string name="back_to_first_page">back to first page</string>
     <string name="add_to_favorite_movie">add to favorite movie</string>
+    <string name="action_sing_up">Sing up</string>
+    <string name="action_register">Register</string>
+    <string name="prompt_name">Enter User Name</string>
+    <string name="prompt_surname">Enter User Surname</string>
+    <string name="tv_login_text">Login:</string>
+    <string name="tv_password_text">Password:</string>
+    <string name="tv_name_text">Name:</string>
+    <string name="tv_surname_text">Surname:</string>
+    <string name="sign_out">Sing out</string>
 </resources>

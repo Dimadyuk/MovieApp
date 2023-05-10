@@ -6,5 +6,6 @@ data class User(
     val password: String,
     val name: String,
     val surname: String,
-    val favoritesMovies: List<Int>
+    val favoritesMovies: List<Int>,
+    val imageUrl: String,
 )
