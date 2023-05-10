@@ -5,6 +5,8 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.data.repositories.MovieRepositoryImpl
 import com.example.movieapp.domain.MovieItem
@@ -31,11 +33,6 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
     private val getTopMovieListUseCase = GetTopMovieListUseCase(repository)
     private val getFavoriteMovieListUseCase = GetFavoriteMovieListUseCase(repository)
 
-    private val getMovieItemUseCase = GetMovieItemUseCase(repository)
-    private val getFavoriteMovieItemUseCase = GetFavoriteMovieItemUseCase(repository)
-    val deleteFavoriteMovieItemUseCase = DeleteFavoriteMovieItemUseCase(repository)
-    val addFavoriteMovieItemUseCase = AddFavoriteMovieItemUseCase(repository)
-
     val popularMovieList = getPopularMovieListUseCase.invoke()
     val topMovieList = getTopMovieListUseCase.invoke()
     val favoriteMovieList = getFavoriteMovieListUseCase.invoke()
@@ -53,18 +50,14 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
         return networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 
-    suspend fun getMovieItem(movieId: Int): MovieItem {
-        return withContext(viewModelScope.coroutineContext + Dispatchers.IO) {
-            getFavoriteMovieItemUseCase.invoke(movieId) ?: getMovieItemUseCase.invoke(movieId)
-        }
-    }
 
-    fun loadData() {
+
+    private fun loadData() {
         loadPopularMovies()
         loadTopMovies()
     }
 
-    fun loadPopularMovies() {
+    private fun loadPopularMovies() {
         if (isNetworkAvailable(application)) {
             viewModelScope.launch {
                 loadPopularMoviesUseCase()
@@ -72,7 +65,7 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
         }
     }
 
-    fun loadTopMovies() {
+    private fun loadTopMovies() {
         if (isNetworkAvailable(application)) {
             viewModelScope.launch {
                 loadTopRatedMoviesUseCase()

@@ -15,4 +15,7 @@
     <string name="popular_movies">Popular Movies</string>
     <string name="top_movies">Top Movies</string>
     <string name="username">UserName</string>
+    <string name="poster_of_movie">poster of movie</string>
+    <string name="back_to_first_page">back to first page</string>
+    <string name="add_to_favorite_movie">add to favorite movie</string>
 </resources>
