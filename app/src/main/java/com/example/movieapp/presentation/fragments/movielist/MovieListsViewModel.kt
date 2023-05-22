@@ -1,4 +1,4 @@
-package com.example.movieapp.presentation.ui
+package com.example.movieapp.presentation.fragments.movielist
 
 import android.app.Application
 import android.content.Context
@@ -14,7 +14,7 @@ import com.example.movieapp.domain.usecases.loadlists.LoadPopularMoviesUseCase
 import com.example.movieapp.domain.usecases.loadlists.LoadTopRatedMoviesUseCase
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val application: Application) : AndroidViewModel(application) {
+class MovieListsViewModel(private val application: Application) : AndroidViewModel(application) {
     private val repository = MovieRepositoryImpl(application)
 
     private val loadPopularMoviesUseCase = LoadPopularMoviesUseCase(repository)

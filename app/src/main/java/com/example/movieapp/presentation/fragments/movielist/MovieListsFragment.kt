@@ -1,4 +1,4 @@
-package com.example.movieapp.presentation.ui.fragments
+package com.example.movieapp.presentation.fragments.movielist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,31 +7,33 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.movieapp.R
-import com.example.movieapp.databinding.FragmentMainBinding
+import com.example.movieapp.databinding.FragmentMovieListsBinding
 import com.example.movieapp.domain.MovieItem
-import com.example.movieapp.presentation.ui.MainViewModel
-import com.example.movieapp.presentation.ui.fragments.adapters.MovieAdapter
+import com.example.movieapp.presentation.fragments.adapters.MovieAdapter
+import com.example.movieapp.presentation.fragments.detail.MovieDetailFragment
 
-class MainFragment : Fragment() {
+class MovieListsFragment : Fragment() {
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: MovieListsViewModel
     private lateinit var popularAdapter: MovieAdapter
     private lateinit var topAdapter: MovieAdapter
     private lateinit var favoriteAdapter: MovieAdapter
-    private val binding by lazy {
-        FragmentMainBinding.inflate(layoutInflater)
-    }
+
+    private var _binding: FragmentMovieListsBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+        _binding = FragmentMovieListsBinding.inflate(inflater, container, false)
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[MovieListsViewModel::class.java]
 
         setupAdapters()
         setupObservers()
@@ -86,19 +88,25 @@ class MainFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.popularMovieList.observe(requireActivity()) {
+        viewModel.popularMovieList.observe(viewLifecycleOwner) {
             popularAdapter.submitList(it)
         }
-        viewModel.topMovieList.observe(requireActivity()) {
+        viewModel.topMovieList.observe(viewLifecycleOwner) {
             topAdapter.submitList(it)
         }
-        viewModel.favoriteMovieList.observe(requireActivity()) {
+        viewModel.favoriteMovieList.observe(viewLifecycleOwner) {
             favoriteAdapter.submitList(it)
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = MovieListsFragment()
     }
 
 }

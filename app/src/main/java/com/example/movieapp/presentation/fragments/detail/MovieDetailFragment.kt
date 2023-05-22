@@ -1,4 +1,4 @@
-package com.example.movieapp.presentation.ui.fragments
+package com.example.movieapp.presentation.fragments.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,9 +15,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MovieDetailFragment : Fragment() {
-    private val binding by lazy {
-        FragmentMovieDetailBinding.inflate(layoutInflater)
-    }
+
+    private var _binding: FragmentMovieDetailBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: DetailViewModel
     private var movieId: Int = MovieItem.UNDEFINED_ID
@@ -30,13 +30,18 @@ class MovieDetailFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity())[DetailViewModel::class.java]
         lifecycleScope.launch {
             viewModel.getMovieItem(movieId)
         }
-        viewModel.movieItem.observe(requireActivity()) {
+        viewModel.movieItem.observe(viewLifecycleOwner) {
             setValues(it)
         }
 
@@ -54,7 +59,7 @@ class MovieDetailFragment : Fragment() {
             }
         }
         binding.btnBack.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
+            parentFragmentManager.popBackStack()
         }
     }
 
@@ -77,7 +82,8 @@ class MovieDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        _binding = FragmentMovieDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 

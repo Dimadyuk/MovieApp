@@ -1,7 +1,7 @@
 package com.example.movieapp.data.mapper
 
-import com.example.movieapp.data.database.FavoriteMovieItemDbModel
-import com.example.movieapp.data.database.MovieItemDbModel
+import com.example.movieapp.data.database.models.FavoriteMovieItemDbModel
+import com.example.movieapp.data.database.models.MovieItemDbModel
 import com.example.movieapp.data.network.ApiFactory
 import com.example.movieapp.data.network.models.MovieItemDto
 import com.example.movieapp.domain.MovieItem

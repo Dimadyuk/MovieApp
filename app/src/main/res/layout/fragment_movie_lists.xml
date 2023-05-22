@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         tools:background="@drawable/night_sky"
-        tools:context=".presentation.ui.fragments.MainFragment">
+        tools:context=".presentation.fragments.movielist.MovieListsFragment">
 
         <LinearLayout
             android:id="@+id/ll_user"

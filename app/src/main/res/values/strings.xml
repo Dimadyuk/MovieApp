@@ -6,8 +6,10 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome!"</string>
-    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_login">Not a valid login</string>
     <string name="invalid_password">Password must be >5 characters</string>
+    <string name="invalid_name">Name must be >1 characters</string>
+    <string name="invalid_surname">Surname must be >1 characters</string>
     <string name="login_failed">"Login failed"</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

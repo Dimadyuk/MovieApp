@@ -1,4 +1,4 @@
-package com.example.movieapp.presentation.ui.fragments
+package com.example.movieapp.presentation.fragments.detail
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
